@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/brive-agenda')
 def brive_agenda():
-    url = "https://www.brive.fr/agenda/"
+    url = "https://www.brive.fr/agenda/complet"
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
     # Sélectionne les blocs d'événements
