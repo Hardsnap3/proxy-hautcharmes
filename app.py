@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/rss')
 def proxy_rss():
-    url = "https://www.tourismecorreze.com/fr/rss-agenda-correze.html"
+    url = "https:/www.tulle-en-correze.com/rss.xml"
     r = requests.get(url)
     return Response(r.content, content_type=r.headers.get('Content-Type', 'text/xml'))
 
