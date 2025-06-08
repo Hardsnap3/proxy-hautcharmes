@@ -12,19 +12,20 @@ def brive_agenda():
     # Sélectionne les blocs d'événements
     events = []
     # Trouve tous les blocs événements (structure du site au 08/06/2025)
-    for card in soup.select(".card-event"):
-        titre = card.select_one(".card-title")
-        date = card.select_one(".date-badge")
-        desc = card.select_one(".card-text")
-        lien = card.select_one("a")
-        events.append({
-            "titre": titre.text.strip() if titre else "",
-            "date": date.text.strip() if date else "",
-            "desc": desc.text.strip() if desc else "",
-            "url": lien["href"] if lien else ""
-        })
-        if len(events) >= 7:  # Prends les 7 premiers
-            break
+    for card in soup.find_all(class_="event-item"):
+    titre = card.find(class_="event-title")
+    date = card.find(class_="event-date")
+    desc = card.find(class_="event-description")
+    lien = card.find("a")
+    events.append({
+        "titre": titre.text.strip() if titre else "",
+        "date": date.text.strip() if date else "",
+        "desc": desc.text.strip() if desc else "",
+        "url": lien["href"] if lien else ""
+    })
+    if len(events) >= 7:
+        break
+
     return jsonify(events)
 
 @app.route('/')
